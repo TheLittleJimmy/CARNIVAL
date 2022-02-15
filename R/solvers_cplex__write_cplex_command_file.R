@@ -6,7 +6,7 @@ writeCplexCommandFile <- function(carnivalOptions){
   resultCplexFile <- carnivalOptions$filenames$resultFile
   cplexCommandFilename <- carnivalOptions$filenames$cplexCommandFile
 
-  write(paste0("read ", lpFilename),
+  write(paste0("read ", '"', lpFilename, '"'),
         cplexCommandFilename, append = TRUE)
   write(paste0("set mip tolerances mipgap ", carnivalOptions$mipGap),
         cplexCommandFilename, append = TRUE)
@@ -22,10 +22,9 @@ writeCplexCommandFile <- function(carnivalOptions){
         cplexCommandFilename, append = TRUE)
   write(paste0("set timelimit ", carnivalOptions$timelimit), cplexCommandFilename, append = TRUE)
   write(paste0("set threads ", carnivalOptions$threads), cplexCommandFilename, append = TRUE)
-  write(paste0("set output clonelog ", carnivalOptions$clonelog), cplexCommandFilename, append = TRUE)
-  write(paste0("set workdir ", carnivalOptions$workdir), cplexCommandFilename, append = TRUE)
+  write(paste0("set output clonelog -1"), cplexCommandFilename, append = TRUE)
   write("populate", cplexCommandFilename, append = TRUE)
-  write(paste0("write ", resultCplexFile, " sol all"),
+  write(paste0("write ", '"', resultCplexFile, '"', " sol all"),
         cplexCommandFilename, append = TRUE)
   write("quit", cplexCommandFilename, append = TRUE)
 
